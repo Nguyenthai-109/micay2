@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thanh toán | Sasin</title>
+  <link rel="stylesheet" href="thanhtoan.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="thucdon.html">Thực đơn</a></li>
+        <li><a href="uudai.html">Ưu đãi</a></li>
+        <li><a href="tuyendung.html">Tuyển dụng</a></li>
+        <li><a href="nhuongquyen.html">Nhượng quyền</a></li>
+        <li><a href="https://www.facebook.com/iaht109/">Sasin Shop</a></li>
+        <li><a href="lienhe.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="checkout-section">
+      <h2>Đơn hàng của bạn</h2>
+      <ul id="checkout-items"></ul>
+      <div class="cart-summary">
+        Tổng tiền: <span id="checkout-total">0 VNĐ</span>
+      </div>
+    </section>
+
+    <section class="payment-section">
+      <h2>Thông tin thanh toán</h2>
+      <form id="payment-form">
+        <label>
+          Họ và tên:
+          <input type="text" id="name" required>
+        </label>
+        <label>
+          Số điện thoại:
+          <input type="tel" id="phone" required>
+        </label>
+        <label>
+          Địa chỉ:
+          <input type="text" id="address" required>
+        </label>
+        <button type="submit">Xác nhận thanh toán</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sasin.vn</p>
+  </footer>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const checkoutItems = document.getElementById('checkout-items');
+    const checkoutTotal = document.getElementById('checkout-total');
+
+    function renderCart() {
+      checkoutItems.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <div class="checkout-item-info">
+            <span>${item.name}</span>
+            <span>${item.price.toLocaleString()} VNĐ</span>
+          </div>
+          <div class="qty-controls">
+            <button onclick="decreaseQty(${index})">-</button>
+            <span>${item.qty}</span>
+            <button onclick="increaseQty(${index})">+</button>
+          </div>
+        `;
+        checkoutItems.appendChild(li);
+        total += item.price * item.qty;
+      });
+      checkoutTotal.textContent = total.toLocaleString() + ' VNĐ';
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function increaseQty(index) {
+      cart[index].qty += 1;
+      renderCart();
+    }
+
+    function decreaseQty(index) {
+      cart[index].qty -= 1;
+      if(cart[index].qty <= 0){
+        cart.splice(index,1);
+      }
+      renderCart();
+    }
+
+    renderCart();
+
+    document.getElementById('payment-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      if(cart.length === 0){
+        alert('Giỏ hàng trống!');
+        return;
+      }
+      alert(`Thanh toán thành công!\nHọ tên: ${document.getElementById('name').value}\nSố điện thoại: ${document.getElementById('phone').value}\nĐịa chỉ: ${document.getElementById('address').value}`);
+      localStorage.removeItem('cart');
+      window.location.href = 'thucdon.html';
+    });
+  </script>
+</body>
+</html>

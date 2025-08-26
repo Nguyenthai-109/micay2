@@ -1,12 +1,17 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db = "sasin_db";
+$host = getenv("dpg-d2mn0c3uibrs73bjs9kg-a");
+$port = getenv("5432");
+$dbname = getenv("sasinclone");
+$user = getenv("sasinclone_user");
+$password = getenv("GGRnJ1OXZemepF8xwQXpIkoauRXJaiOZ");
 
-$conn = new mysqli($host, $user, $pass, $db);
+// Kết nối
+$conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
 
-if ($conn->connect_error) {
-  die("Kết nối thất bại: " . $conn->connect_error);
+if (!$conn) {
+    die("Kết nối PostgreSQL thất bại!");
 }
+
+// Test
+echo "Kết nối PostgreSQL thành công!";
 ?>

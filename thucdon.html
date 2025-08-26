@@ -1,4 +1,3 @@
-<!-- Thực đơn.html -->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -6,64 +5,181 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thực đơn | Sasin</title>
   <link rel="stylesheet" href="thucdon.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+
+    
+  </style>
 </head>
 <body>
   <header>
     <nav>
-      <!-- Menu thanh điều hướng -->
-      <ul>
-        
-        <li><a href="#">Thực đơn</a></li>
-        <li><a href="uudai.html">Ưu đãi</a></li>
-        <li><a href="tuyendung.html">Tuyển dụng</a></li>
-        <li><a href="nhuongquyen.html">Nhượng quyền</a></li>
-        <li><a href="https://www.facebook.com/iaht109/">Sasin Shop</a></li>
-        <li><a href="lienhe.html">Liên hệ</a></li>
-      <a class="lang">ENG</a>
-      </ul>
-    </nav>
+  <!-- GIỎ HÀNG sang trái -->
+  <div class="icons-left">
+    <i class="fas fa-shopping-cart" title="Giỏ hàng" onclick="toggleCart()">
+      <span class="cart-count" id="cart-count">0</span>
+    </i>
+  </div>
+
+  <!-- MENU ở giữa -->
+  <ul>
+    <li><a href="#">Thực đơn</a></li>
+    <li><a href="uudai.html">Ưu đãi</a></li>
+    <li><a href="tuyendung.html">Tuyển dụng</a></li>
+    <li><a href="nhuongquyen.html">Nhượng quyền</a></li>
+    <li><a href="https://www.facebook.com/iaht109/">Sasin Shop</a></li>
+    <li><a href="lienhe.html">Liên hệ</a></li>
+  </ul>
+
+  <!-- USER sang phải -->
+  <div class="icons-right">
+    <a href="thongtintaikhoan.html">
+      <i class="fas fa-user" title="Tài khoản"></i>
+    </a>
+  </div>
+</nav>
+
   </header>
 
-  <main>
-    <section class="menu-section">
-      <h2>Thực đơn</h2>
-      <div class="menu-grid">
-        <!-- Mỗi món ăn -->
-        <div class="menu-item">
-          <img src="img/bo-my.png" alt="Mì Bò Mỹ">
-          <h3>Mì Bò Mỹ (Kim chi/ Soyum/ Sincay)</h3>
-          <p>Mì cay Sasin, thịt bò, xúc xích, cá viên, kim chi, súc lố, nấm, bắp cải tím, ...</p>
-          <strong>59,000VNĐ</strong>
-        </div>
+  <!-- Popup giỏ hàng -->
+  <div id="cart-popup">
+    <h3>Giỏ hàng</h3>
+    <ul id="cart-items"></ul>
+    <div class="cart-summary">
+      <p><strong>Tổng: </strong><span id="cart-total">0 VNĐ</span></p>
+      <button id="checkout-btn" onclick="goToCheckout()">Thanh toán</button>
+    </div>
+  </div>
 
-        <div class="menu-item">
-          <img src="img/bo-trung.png" alt="Mì Bò Trứng">
-          <h3>Mì Bò Trứng (Kim chi/ Soyum/ Sincay)</h3>
-          <p>Mì cay Sasin, thịt bò, trứng lòng đào, xúc xích, cá viên, kim chi, súc lố, nấm, ...</p>
-          <strong>65,000VNĐ</strong>
-        </div>
+  <h1>Thực đơn Sasin</h1>
 
-        <div class="menu-item">
-          <img src="img/dui-ga.png" alt="Mì Đùi Gà">
-          <h3>Mì Đùi Gà (Kim chi/ Soyum/ Sincay)</h3>
-          <p>Mì cay Sasin, đùi gà, cá viên, kim chi, súc lố, nấm, bắp cải tím, ngò gai, ...</p>
-          <strong>59,000VNĐ</strong>
-        </div>
-
-        <div class="menu-item">
-          <img src="img/kimchi-ca.png" alt="Mì Kim Chi Cá">
-          <h3>Mì Kim Chi Cá</h3>
-          <p>Mì cay Sasin, phi lê cá, nấm, cá viên, kim chi, súc lố, bắp cải tím, ngò gai</p>
-          <strong>49,000VNĐ</strong>
-        </div>
-
-        <!-- Bạn có thể thêm nhiều menu-item nừa tại đây -->
+  <div class="menu-container">
+    <div class="menu-item" data-name="Mì Bò Mỹ" data-price="59000" data-img="assets/imagemenu/mon1.WEBP">
+      <img src="assets\mibo.jpg" alt="Mì Bò Mỹ">
+      <h3>Mì Bò Mỹ (Kim chi/ Soyum/ Sincay)</h3>
+      <p>Mì cay Sasin, thịt bò, xúc xích, cá viên, kim chi, súc lố, nấm, bắp cải tím, ...</p>
+      <div class="price">
+        59,000 VNĐ
+        <i class="fas fa-cart-plus" title="Thêm vào giỏ" onclick="addToCart(this)"></i>
       </div>
-    </section>
-  </main>
+    </div>
+
+    <div class="menu-item" data-name="Mì Bò Trứng" data-price="65000" data-img="assets/imagemenu/mon2.JPG">
+      <img src="assets\mibotrung.jpg" alt="Mì Bò Trứng">
+      <h3>Mì Bò Trứng (Kim chi/ Soyum/ Sincay)</h3>
+      <p>Mì cay Sasin, thịt bò, trứng lòng đào, xúc xích, cá viên, kim chi, súc lố, nấm, ...</p>
+      <div class="price">
+        65,000 VNĐ
+        <i class="fas fa-cart-plus" title="Thêm vào giỏ" onclick="addToCart(this)"></i>
+      </div>
+    </div>
+
+    <div class="menu-item" data-name="Mì Đùi Gà" data-price="59000" data-img="assets/imagemenu/mon3.JPG">
+      <img src="assets\miga.jpg" alt="Mì Đùi Gà">
+      <h3>Mì Đùi Gà (Kim chi/ Soyum/ Sincay)</h3>
+      <p>Mì cay Sasin, đùi gà, cá viên, kim chi, súc lố, nấm, bắp cải tím, ngò gai, ...</p>
+      <div class="price">
+        59,000 VNĐ
+        <i class="fas fa-cart-plus" title="Thêm vào giỏ" onclick="addToCart(this)"></i>
+      </div>
+    </div>
+
+    <div class="menu-item" data-name="Mì Kim Chi Cá" data-price="49000" data-img="assets/imagemenu/mon4.PNG">
+      <img src="assets\mica.jpg" alt="Mì Kim Chi Cá">
+      <h3>Mì Kim Chi Cá</h3>
+      <p>Mì cay Sasin, phi lê cá, nấm, cá viên, kim chi, súc lố, bắp cải tím, ngò gai</p>
+      <div class="price">
+        49,000 VNĐ
+        <i class="fas fa-cart-plus" title="Thêm vào giỏ" onclick="addToCart(this)"></i>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast">Đã thêm vào giỏ hàng!</div>
 
   <footer>
     <p>&copy; 2025 Sasin.vn</p>
   </footer>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function toggleCart() {
+      const cartPopup = document.getElementById('cart-popup');
+      cartPopup.style.display = cartPopup.style.display === 'none' ? 'block' : 'none';
+      renderCart();
+    }
+
+    function addToCart(el) {
+      const itemDiv = el.closest('.menu-item');
+      const name = itemDiv.dataset.name;
+      const price = Number(itemDiv.dataset.price);
+      const img = itemDiv.dataset.img;
+
+      const existing = cart.find(i => i.name === name);
+      if(existing){
+        existing.qty += 1;
+      } else {
+        cart.push({name, price, img, qty:1});
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+
+      document.getElementById('cart-count').textContent = cart.reduce((acc,i)=>acc+i.qty,0);
+
+      const toast = document.getElementById('toast');
+      toast.style.display = 'block';
+      setTimeout(()=> toast.style.display='none',1000);
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      cartItems.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item,index)=>{
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <div class="cart-item-info">
+            <span>${item.name}</span>
+            <span>${item.price.toLocaleString()} VNĐ</span>
+          </div>
+          <div class="qty-controls">
+            <button onclick="decreaseQty(${index})">-</button>
+            <span>${item.qty}</span>
+            <button onclick="increaseQty(${index})">+</button>
+          </div>
+        `;
+        cartItems.appendChild(li);
+        total += item.price*item.qty;
+      });
+
+      cartTotal.textContent = total.toLocaleString() + ' VNĐ';
+      document.getElementById('cart-count').textContent = cart.reduce((acc,i)=>acc+i.qty,0);
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function increaseQty(index){
+      cart[index].qty +=1;
+      renderCart();
+    }
+
+    function decreaseQty(index){
+      cart[index].qty -=1;
+      if(cart[index].qty<=0){
+        cart.splice(index,1);
+      }
+      renderCart();
+    }
+
+    function goToCheckout(){
+      window.location.href = "thanhtoan.html";
+    }
+
+    renderCart();
+  </script>
 </body>
 </html>

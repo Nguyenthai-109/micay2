@@ -1,0 +1,57 @@
+<?php session_start(); ?>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thông tin tài khoản | Sasin</title>
+  <link rel="stylesheet" href="thongtintaikhoan.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li><a href="thucdon.html">Thực đơn</a></li>
+      <li><a href="uudai.html">Ưu đãi</a></li>
+      <li><a href="tuyendung.html">Tuyển dụng</a></li>
+      <li><a href="nhuongquyen.html">Nhượng quyền</a></li>
+      <li><a href="https://www.facebook.com/iaht109/">Sasin Shop</a></li>
+      <li><a href="lienhe.html">Liên hệ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <h1>Thông tin tài khoản</h1>
+  <div class="menu-container">
+    <div class="menu-item">
+      <h3>Thông tin cá nhân</h3>
+
+      <?php if(isset($_SESSION['update_success'])): ?>
+        <p class="success-message"><?= $_SESSION['update_success']; unset($_SESSION['update_success']); ?></p>
+      <?php endif; ?>
+
+      <?php if(isset($_SESSION['update_error'])): ?>
+        <p class="error-message"><?= $_SESSION['update_error']; unset($_SESSION['update_error']); ?></p>
+      <?php endif; ?>
+
+      <form action="update_account.php" method="POST">
+        <input class="form-field" type="text" name="fullname" value="<?= $_SESSION['user']['fullname'] ?? '' ?>" placeholder="Họ và tên" required />
+        <input class="form-field" type="email" name="email" value="<?= $_SESSION['user']['email'] ?? '' ?>" placeholder="Email" required />
+        <input class="form-field" type="text" name="username" value="<?= $_SESSION['user']['username'] ?? '' ?>" placeholder="Tên đăng nhập" readonly />
+        <input class="form-field" type="tel" name="phone" value="<?= $_SESSION['user']['phone'] ?? '' ?>" placeholder="Số điện thoại" />
+        <input class="form-field" type="text" name="address" value="<?= $_SESSION['user']['address'] ?? '' ?>" placeholder="Địa chỉ" />
+        <input class="form-field" type="password" name="password" placeholder="Mật khẩu mới (nếu muốn đổi)" />
+        <button type="submit" class="form-button">Cập nhật thông tin</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2025 Sasin.vn</p>
+</footer>
+
+</body>
+</html>

@@ -117,7 +117,7 @@
       <li><a href="#nhuongquyen">Nhượng quyền</a></li>
       <li><a href="https://www.facebook.com/iaht109/">Sasin Shop</a></li>
       <li><a href="lienhe.html">Liên hệ</a></li>
-      <li><a href="#dangki">Đăng kí</a></li>
+      <li><a href="#dangki">Đăng ký</a></li>
       <a class="lang">ENG</a>
     </ul>
   </nav>
